@@ -2,11 +2,11 @@ import React from "react";
 import Avatar from "react-avatar";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { deleteContact } from "../../actions/contactAction";
+import { deleteItem } from "../../actions/itemAction";
 
-const Contact = ({ contact, selectAll }) => {
+const Item = ({ contact, selectAll }) => {
   const dispatch = useDispatch();
-  const { name, phone, email, id } = contact;
+  const { name, email, id, link,gender,hobbies } = contact;
   return (
     <tr>
       <td>
@@ -23,8 +23,10 @@ const Contact = ({ contact, selectAll }) => {
       <td>
         <Avatar className="mr-2" name={name} size="40" round={true} /> {name}
       </td>
-      <td>{phone}</td>
       <td>{email}</td>
+      <td>{link}</td>
+      <td>{gender}</td>
+      <td>{hobbies}</td>
       <td className="actions">
         <Link to={`/contacts/edit/${id}`}>
           <span className="material-icons mr-2 ">edit</span>
@@ -32,7 +34,7 @@ const Contact = ({ contact, selectAll }) => {
 
         <span
           className="material-icons text-danger"
-          onClick={() => dispatch(deleteContact(id))}
+          onClick={() => dispatch(deleteItem(id))}
         >
           remove_circle
         </span>
@@ -41,4 +43,4 @@ const Contact = ({ contact, selectAll }) => {
   );
 };
 
-export default Contact;
+export default Item;

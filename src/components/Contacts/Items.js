@@ -1,33 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Contact from "./Contact";
+import Item from "./Item";
 import {
-  selectAllContact,
-  clearAllContact,
-  deleteAllContact,
-} from "../../actions/contactAction";
+  selectAllItem,
+  clearAllItem,
+  deleteAllItem,
+} from "../../actions/itemAction";
 
-const Contacts = () => {
+const Items = () => {
   const dispatch = useDispatch();
   const [selectAll, setSelectAll] = useState(false);
-  const contacts = useSelector((state) => state.contact.contacts);
-  const selectedContacts = useSelector(
-    (state) => state.contact.selectedContacts
+  const items = useSelector((state) => state.contact.items);
+  const selectedItems = useSelector(
+    (state) => state.contact.selectedItems
   );
 
   useEffect(() => {
     if (selectAll) {
-      dispatch(selectAllContact(contacts.map((contact) => contact.id)));
+      dispatch(selectAllItem(items.map((contact) => contact.id)));
     } else {
-      dispatch(clearAllContact());
+      dispatch(clearAllItem());
     }
   }, [selectAll]);
   return (
     <div>
-      {selectedContacts.length > 0 ? (
+      {selectedItems.length > 0 ? (
         <button
           className="btn btn-danger mb-3"
-          onClick={() => dispatch(deleteAllContact())}
+          onClick={() => dispatch(deleteAllItem())}
         >
           delete all
         </button>
@@ -51,14 +51,16 @@ const Contacts = () => {
               </div>
             </th>
             <th>Name</th>
-            <th>Phone</th>
             <th>Email</th>
+            <th>Portfolio Link</th>
+            <th>Gender</th>
+            <th>Hobbies</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {contacts.map((contact) => (
-            <Contact
+          {items.map((contact) => (
+            <Item
               contact={contact}
               key={contact.key}
               selectAll={selectAll}
@@ -70,4 +72,4 @@ const Contacts = () => {
   );
 };
 
-export default Contacts;
+export default Items;
